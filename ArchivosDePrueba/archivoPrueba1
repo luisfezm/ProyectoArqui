@@ -1,0 +1,20 @@
+add rs1,rs2,rs3
+add rs1,rs2,rs3 luis
+add rs1,rs2,rs3luis
+add rs2,rs3,rs5
+sub rs1,rs2,
+mul rs5,rs6,rs7
+div rs2,rs6,rs9
+ret
+ret rs1
+div rs2,rs6,100
+cmp rs2,rs3
+cmp rs2,100
+nop
+nop nop
+nop rs1
+nop 10
+nop rs1,rs2
+lsl rs1,rs2,rs3
+lsl rs1,rs2,skr
+lsr rs1,rs2,100

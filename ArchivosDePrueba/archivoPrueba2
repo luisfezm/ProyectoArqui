@@ -1,0 +1,2 @@
+mov rs1,5
+add rs1,rs2,rs3

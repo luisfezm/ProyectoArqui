@@ -9,7 +9,7 @@ public class Instruccion {
     public int indexRegistroDestino=Integer.MIN_VALUE;
     public int indexRegistroPrincipal=Integer.MIN_VALUE;
     public int indexRegistroSecundario=Integer.MIN_VALUE;
-    public int valorImm;
+    public int valorImm=Integer.MIN_VALUE;
 
     /**
      * Constructor para instruccion nop o ret

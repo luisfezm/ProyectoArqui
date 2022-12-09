@@ -7,7 +7,7 @@ public class Arquitectura {
         registros=new ArrayList<>();
         // inicialmente, todos los registros tienen como valor un 0
         for(int i=0;i<=16;i++) {
-            registros.add(new Registro("0"));
+            registros.add(new Registro("rs"+i,0));
         }
     }
     public boolean ejecutarInstrucciones(ArrayList<Instruccion> instrucciones ) {
@@ -17,10 +17,21 @@ public class Arquitectura {
         return true;
     }
 
+    public Registro getRegistro(String id){
+        for(Registro registro: registros){
+            if( registro.getId() == id){
+                return registro;
+            }
+        }
+        return null; // no encontró el id del registro
+    }
+
     public void mostrarRegistros(){
         // recorremos cada Registro del registro
-        for(int i=0;i<=16;i++){
-            System.out.println("[N° registro: "+i+" ; Contenido: "+registros.get(i).getValor()+"]");
+        for(Registro registro: registros){
+            System.out.println(registro.mostrarRegistro());
         }
     }
+
+    
 }

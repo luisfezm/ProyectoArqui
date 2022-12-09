@@ -98,11 +98,6 @@ public class Archivo {
                     match = matcher.find();
                     if (match) {
                         instrucciones.add(crearInstruccion("op4", lineaSpliteada));
-                    } else {
-                        // la linea no tiene ningun formato válido, por tanto
-                        // el documento de entrada es incorrecto y no se puede
-                        // procesar
-                        formatoCorrecto = false;
                     }
                 }
             }

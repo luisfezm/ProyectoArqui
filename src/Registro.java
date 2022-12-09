@@ -1,15 +1,25 @@
 public class Registro {
-    private String valor;
+    private String id;
+    private int valor;
 
-    public Registro(String valor) {
+    public Registro(String id,int valor) {
+        this.id=id;
         this.valor=valor;
     }
 
-    public String getValor() {
+    public int getValor() {
         return valor;
     }
 
-    public void setValor(String valor) {
+    public void setValor(int valor) {
         this.valor = valor;
+    }
+
+    public String getId(){
+        return id;
+    }
+    
+    public String mostrarRegistro(){
+        return "[id: "+id+" ; "+"valor: "+valor+"]";
     }
 }

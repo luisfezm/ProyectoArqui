@@ -9,9 +9,24 @@ public class Main {
         if(archivo1.getFormatoCorrecto()){
             System.out.println("Archivo en formato correcto");
             arq.ejecutarInstrucciones(archivo1.getInstrucciones());
+            arq.mostrarRegistros();
+
         }else{
             System.out.println("El formato del archivo es incorrecto, por favor ve en la carpeta DEBUG_ARchivosDePrueba \n" +
                     "el archivo: DEBUG_"+nombreArchivo);
         }
     }
 }
+
+/*
+ * add r1,r2,r3
+ * 
+ * ...
+ * ...
+ * ...
+ * 
+ * sus r2,r4,r5
+ * 
+ * ...
+ * ...
+ */

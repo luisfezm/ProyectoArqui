@@ -1,2 +1,3 @@
 mov rs1,5 <-- Formato valido: true
 add rs1,rs2,rs3 <-- Formato valido: true
+ret <-- Formato valido: true

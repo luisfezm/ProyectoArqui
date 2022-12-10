@@ -35,7 +35,7 @@ public class Instruccion {
         this.operacion=operacion;
         this.registroDestino=registroDestino;
         this.registroPrincipal=registroPrincipal;
-        this.registroDestino=registroSecundario;
+        this.registroSecundario=registroSecundario;
     }
 
     /**
@@ -84,8 +84,8 @@ public class Instruccion {
 
     @Override
     public String toString() {
-        return "Instruccion [operacion=" + operacion + ", indexRegistroDestino=" + registroDestino
-                + ", indexRegistroPrincipal=" + registroPrincipal + ", indexRegistroSecundario="
+        return "Instruccion [operacion=" + operacion + ", registroDestino=" + registroDestino
+                + ", registroPrincipal=" + registroPrincipal + ", registroSecundario="
                 + registroSecundario + ", valorImm=" + valorImm + "]";
     }
 }

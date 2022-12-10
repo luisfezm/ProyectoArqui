@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -72,7 +73,7 @@ public class Archivo {
         // splitear linea de texto
         Pattern pattern = Pattern.compile("(\\s|,)", Pattern.CANON_EQ);
         String[] lineaSpliteada = pattern.split(lineaTexto);
-        //System.out.println("SALIDA SPLIT:"+Arrays.toString(lineaSpliteada));
+        System.out.println("DEBUG - SALIDA SPLIT:"+Arrays.toString(lineaSpliteada));
 
         // TODO Llegué hasta el nop, del ld hacia abajo esta incompleto
         pattern = Pattern.compile(op1, Pattern.CANON_EQ);
@@ -107,41 +108,18 @@ public class Archivo {
 
     public Instruccion crearInstruccion(String op, String[] lineaSpliteada) {
         String regExpDig = "((\\d)+)";
-        // FORMATO op1: op,indexDes,indexPrim,IndexSec
-        // FORMATO op2: op,indexDes,indexPrim,Imm
         if (op == "op4") {
             return new Instruccion(lineaSpliteada[0]);
         }
-        //Pattern pattern = Pattern.compile(regExpDig, Pattern.CASE_INSENSITIVE);
-        //Matcher matcher = pattern.matcher(lineaSpliteada[1]);
-        //String regDestino = "";
-        //while (matcher.find()) {
-        //    regDestino = matcher.group();
-        //}
         if (op == "op3") {
-			/*
-			return new Instruccion(lineaSpliteada[0],Integer.parseInt(regDestino),
-					Integer.parseInt(lineaSpliteada[2]));
-			*/
             return new Instruccion(lineaSpliteada[0], lineaSpliteada[1], Integer.parseInt(lineaSpliteada[2]));
         }
-        //matcher = pattern.matcher(lineaSpliteada[2]);
-        //String regPrim = "";
-        //while (matcher.find()) {
-        //    regPrim = matcher.group();
-        //}
 
         if (op == "op1") {
-            //matcher = pattern.matcher(lineaSpliteada[3]);
-            //String regSec = "";
-            //hile (matcher.find()) {
-            //    regSec = matcher.group();
-            //}
-            return new Instruccion(lineaSpliteada[0], lineaSpliteada[1],
-                    lineaSpliteada[2],lineaSpliteada[3]);
+            System.out.println("FINAL:"+lineaSpliteada[3]);
+            return new Instruccion(lineaSpliteada[0], lineaSpliteada[1],lineaSpliteada[2],lineaSpliteada[3]);
         } else if (op == "op2") {
-            return new Instruccion(lineaSpliteada[0], lineaSpliteada[1],
-                    lineaSpliteada[2],Integer.parseInt(lineaSpliteada[3]));
+            return new Instruccion(lineaSpliteada[0], lineaSpliteada[1],lineaSpliteada[2],Integer.parseInt(lineaSpliteada[3]));
         }
         return null;
     }

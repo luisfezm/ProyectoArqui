@@ -112,36 +112,36 @@ public class Archivo {
         if (op == "op4") {
             return new Instruccion(lineaSpliteada[0]);
         }
-        Pattern pattern = Pattern.compile(regExpDig, Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(lineaSpliteada[1]);
-        String regDestino = "";
-        while (matcher.find()) {
-            regDestino = matcher.group();
-        }
+        //Pattern pattern = Pattern.compile(regExpDig, Pattern.CASE_INSENSITIVE);
+        //Matcher matcher = pattern.matcher(lineaSpliteada[1]);
+        //String regDestino = "";
+        //while (matcher.find()) {
+        //    regDestino = matcher.group();
+        //}
         if (op == "op3") {
 			/*
 			return new Instruccion(lineaSpliteada[0],Integer.parseInt(regDestino),
 					Integer.parseInt(lineaSpliteada[2]));
 			*/
-            return new Instruccion(lineaSpliteada[0], Integer.parseInt(regDestino), Integer.parseInt(lineaSpliteada[2]));
+            return new Instruccion(lineaSpliteada[0], lineaSpliteada[1], Integer.parseInt(lineaSpliteada[2]));
         }
-        matcher = pattern.matcher(lineaSpliteada[2]);
-        String regPrim = "";
-        while (matcher.find()) {
-            regPrim = matcher.group();
-        }
+        //matcher = pattern.matcher(lineaSpliteada[2]);
+        //String regPrim = "";
+        //while (matcher.find()) {
+        //    regPrim = matcher.group();
+        //}
 
         if (op == "op1") {
-            matcher = pattern.matcher(lineaSpliteada[3]);
-            String regSec = "";
-            while (matcher.find()) {
-                regSec = matcher.group();
-            }
-            return new Instruccion(lineaSpliteada[0], Integer.parseInt(regDestino),
-                    Integer.parseInt(regPrim), Integer.parseInt(regSec), false);
+            //matcher = pattern.matcher(lineaSpliteada[3]);
+            //String regSec = "";
+            //hile (matcher.find()) {
+            //    regSec = matcher.group();
+            //}
+            return new Instruccion(lineaSpliteada[0], lineaSpliteada[1],
+                    lineaSpliteada[2],lineaSpliteada[3]);
         } else if (op == "op2") {
-            return new Instruccion(lineaSpliteada[0], Integer.parseInt(regDestino),
-                    Integer.parseInt(regPrim), Integer.parseInt(lineaSpliteada[3]), true);
+            return new Instruccion(lineaSpliteada[0], lineaSpliteada[1],
+                    lineaSpliteada[2],Integer.parseInt(lineaSpliteada[3]));
         }
         return null;
     }

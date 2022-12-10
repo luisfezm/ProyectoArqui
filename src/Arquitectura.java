@@ -17,13 +17,27 @@ public class Arquitectura {
         return true;
     }
 
-    public Registro getRegistro(String id){
+    /*
+     * Metodo para obtener el valor de un registro según su id
+     */
+    public Integer getRegistro(String id){
         for(Registro registro: registros){
             if( registro.getId() == id){
-                return registro;
+                return registro.getValor();
             }
         }
         return null; // no encontró el id del registro
+    }
+
+    /*
+     * Metodo para setear un valor en un registro según su id
+     */
+    public void setValueOnRegistro(String id,int value){
+        for(Registro registro: registros){
+            if( registro.getId() == id){
+                registro.setValor(value);
+            }
+        }
     }
 
     public void mostrarRegistros(){
@@ -33,5 +47,5 @@ public class Arquitectura {
         }
     }
 
-    
+
 }

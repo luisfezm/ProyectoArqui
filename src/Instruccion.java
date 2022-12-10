@@ -6,9 +6,9 @@ public class Instruccion {
      * por tanto, se inicializan las valores en el menor integer para saber que cuando
      * no poseen este valor significa que se inicializaron
      */
-    public int indexRegistroDestino=Integer.MIN_VALUE;
-    public int indexRegistroPrincipal=Integer.MIN_VALUE;
-    public int indexRegistroSecundario=Integer.MIN_VALUE;
+    public String registroDestino="";
+    public String registroPrincipal="";
+    public String registroSecundario="";
     public int valorImm=Integer.MIN_VALUE;
 
     /**
@@ -21,9 +21,9 @@ public class Instruccion {
     /**
      * Constructor para instrucción cmp|not|mov
      */
-    public Instruccion(String operacion,int indexRegistroDestino,int valorImm) {
+    public Instruccion(String operacion,String registroDestino,int valorImm) {
         this.operacion=operacion;
-        this.indexRegistroDestino=indexRegistroDestino;
+        this.registroDestino=registroDestino;
         this.valorImm=valorImm;
     }
 
@@ -31,52 +31,45 @@ public class Instruccion {
      * Constructor para operacion add|sub|mul|div|mod|and|or|lsl|lsr|asr
      * sin valor inmutable
      */
-    public Instruccion(String operacion, int indexRegistroDestino, int indexRegistroPrincipal, int valFinal, boolean conImm) {
+    public Instruccion(String operacion, String registroDestino, String registroPrincipal, String registroSecundario){
         this.operacion=operacion;
-        this.indexRegistroDestino=indexRegistroDestino;
-        this.indexRegistroPrincipal=indexRegistroPrincipal;
-        if(conImm) {
-            this.valorImm=valFinal;
-        }else {
-            this.indexRegistroSecundario=valFinal;
-        }
+        this.registroDestino=registroDestino;
+        this.registroPrincipal=registroPrincipal;
+        this.registroDestino=registroSecundario;
     }
 
-
-
-
-    public void add() {}
-    public void sub() {}
-    public void mul() {}
-    public void div() {}
-    public void mod() {}
-    public void and() {}
-    public void or() {}
-    public void lsl() {}
-    public void lsr() {}
-    public void asr() {}
-    public void cmp() {}
-    public void not() {}
-    public void mov() {}
-    public void nop() {}
-    public void ret() {}
+    /**
+     * Constructor para operacion add|sub|mul|div|mod|and|or|lsl|lsr|asr
+     * con valor inmutable
+     */
+    public Instruccion(String operacion, String registroDestino, String registroPrincipal, int valorImm){
+        this.operacion=operacion;
+        this.registroDestino=registroDestino;
+        this.registroPrincipal=registroPrincipal;
+        this.valorImm=valorImm;
+    }
+    
+    
+    /* A continuación vienen los metodos para verificar si se inicializaron los registros o valor inmutable,
+     * más que nada por seguridad
+    */
 
     public boolean regDestInicializado() {
-        if(indexRegistroDestino!=Integer.MIN_VALUE) {
+        if(registroDestino!="") {
             return true;
         }
         return false;
     }
 
     public boolean regPrinInicializado() {
-        if(indexRegistroPrincipal!=Integer.MIN_VALUE) {
+        if(registroPrincipal!="") {
             return true;
         }
         return false;
     }
 
     public boolean regSecInicializado() {
-        if(indexRegistroSecundario!=Integer.MIN_VALUE) {
+        if(registroSecundario!="") {
             return true;
         }
         return false;
@@ -91,8 +84,8 @@ public class Instruccion {
 
     @Override
     public String toString() {
-        return "Instruccion [operacion=" + operacion + ", indexRegistroDestino=" + indexRegistroDestino
-                + ", indexRegistroPrincipal=" + indexRegistroPrincipal + ", indexRegistroSecundario="
-                + indexRegistroSecundario + ", valorImm=" + valorImm + "]";
+        return "Instruccion [operacion=" + operacion + ", indexRegistroDestino=" + registroDestino
+                + ", indexRegistroPrincipal=" + registroPrincipal + ", indexRegistroSecundario="
+                + registroSecundario + ", valorImm=" + valorImm + "]";
     }
 }

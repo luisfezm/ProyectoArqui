@@ -11,6 +11,10 @@ public class Arquitectura {
         }
     }
     public boolean ejecutarInstrucciones(ArrayList<Instruccion> instrucciones ) {
+        System.out.println("REGISTROS EN UN INICIO");
+        mostrarRegistros();
+        System.out.println();
+
         for(Instruccion instruccion: instrucciones) {
             System.out.println(instruccion.toString());
             determinarOperacion(instruccion);
@@ -45,6 +49,19 @@ public class Arquitectura {
                 break;
             /* --------- Operación mod --------- */   
             case "mod":
+                if(instruccion.registroSecundario == ""){
+                    operacionMod( // con imm
+                        instruccion.registroDestino,
+                        instruccion.registroPrincipal,
+                        instruccion.valorImm
+                    );
+                }else{
+                    operacionMod( // en caso contrario, es con registro
+                        instruccion.registroDestino,
+                        instruccion.registroPrincipal,
+                        instruccion.registroSecundario
+                    );
+                }   
                 break;
             /* --------- Operación and --------- */
             case "and":
@@ -63,6 +80,16 @@ public class Arquitectura {
         setValorRegistro(registroDestino, resultado);   
     }
 
+    public void operacionMod(String registroDestino, String registroPrincipal, String registroSecundario){
+        int resultado= getValorRegistro(registroPrincipal)%getValorRegistro(registroSecundario);
+        setValorRegistro(registroDestino, resultado);
+    }
+
+    public void operacionMod(String registroDestino, String registroPrincipal, int Imm){
+        int resultado= getValorRegistro(registroPrincipal)%Imm;
+        setValorRegistro(registroDestino, resultado);   
+    }
+    /* ----------------------------------- FIN OPERACIONES---------------------------------------------- */
 
     /*
      * Metodo para obtener el valor de un registro según su id

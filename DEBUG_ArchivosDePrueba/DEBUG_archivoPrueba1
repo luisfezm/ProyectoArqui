@@ -1,1 +1,3 @@
 div rs1,rs2,rs5 <-- Formato valido: true
+div rs1,rs2,1 <-- Formato valido: true
+mod rs0,rs15,2 <-- Formato valido: true

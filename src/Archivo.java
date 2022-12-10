@@ -73,7 +73,7 @@ public class Archivo {
         // splitear linea de texto
         Pattern pattern = Pattern.compile("(\\s|,)", Pattern.CANON_EQ);
         String[] lineaSpliteada = pattern.split(lineaTexto);
-        System.out.println("DEBUG - SALIDA SPLIT:"+Arrays.toString(lineaSpliteada));
+        //System.out.println("DEBUG - SALIDA SPLIT:"+Arrays.toString(lineaSpliteada));
 
         // TODO Llegué hasta el nop, del ld hacia abajo esta incompleto
         pattern = Pattern.compile(op1, Pattern.CANON_EQ);
@@ -116,7 +116,6 @@ public class Archivo {
         }
 
         if (op == "op1") {
-            System.out.println("FINAL:"+lineaSpliteada[3]);
             return new Instruccion(lineaSpliteada[0], lineaSpliteada[1],lineaSpliteada[2],lineaSpliteada[3]);
         } else if (op == "op2") {
             return new Instruccion(lineaSpliteada[0], lineaSpliteada[1],lineaSpliteada[2],Integer.parseInt(lineaSpliteada[3]));

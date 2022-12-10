@@ -7,10 +7,14 @@ public class Arquitectura {
         registros=new ArrayList<>();
         // inicialmente, todos los registros tienen como valor un 0
         for(int i=0;i<=16;i++) {
-            registros.add(new Registro("rs"+i,2));
+            registros.add(new Registro("rs"+i,0));
         }
     }
     public boolean ejecutarInstrucciones(ArrayList<Instruccion> instrucciones ) {
+        System.out.println("REGISTROS EN UN INICIO");
+        mostrarRegistros();
+        System.out.println();
+
         for(Instruccion instruccion: instrucciones) {
             System.out.println(instruccion.toString());
             determinarOperacion(instruccion);
@@ -45,9 +49,36 @@ public class Arquitectura {
                 break;
             /* --------- Operación mod --------- */   
             case "mod":
+                if(instruccion.registroSecundario == ""){
+                    operacionMod( // con imm
+                        instruccion.registroDestino,
+                        instruccion.registroPrincipal,
+                        instruccion.valorImm
+                    );
+                }else{
+                    operacionMod( // en caso contrario, es con registro
+                        instruccion.registroDestino,
+                        instruccion.registroPrincipal,
+                        instruccion.registroSecundario
+                    );
+                }   
                 break;
             /* --------- Operación and --------- */
-            case "and":
+            case "cmp":
+                break;
+            /* --------- Operación mov --------- */
+            case "mov":
+                if(instruccion.registroPrincipal==""){ // con imm
+                    operacionMov(
+                        instruccion.registroDestino,
+                        instruccion.valorImm
+                    );
+                }else{ // con registro
+                    operacionMov(
+                        instruccion.registroDestino,
+                        instruccion.registroPrincipal
+                    );
+                }
                 break;
         }
     }
@@ -63,6 +94,27 @@ public class Arquitectura {
         setValorRegistro(registroDestino, resultado);   
     }
 
+    public void operacionMod(String registroDestino, String registroPrincipal, String registroSecundario){
+        int resultado= getValorRegistro(registroPrincipal)%getValorRegistro(registroSecundario);
+        setValorRegistro(registroDestino, resultado);
+    }
+
+    public void operacionMod(String registroDestino, String registroPrincipal, int Imm){
+        int resultado= getValorRegistro(registroPrincipal)%Imm;
+        setValorRegistro(registroDestino, resultado);   
+        
+    }
+
+    /* ACÁ IRIÁN OPERACIONES CMP,AND;OR,NOT */
+
+    public void operacionMov(String registroDestino, String registroPrincipal){
+        setValorRegistro(registroDestino, getValorRegistro(registroPrincipal));
+    }
+
+    public void operacionMov(String registroDestino, int Imm){
+        setValorRegistro(registroDestino, Imm);
+    }
+    /* ----------------------------------- FIN OPERACIONES---------------------------------------------- */
 
     /*
      * Metodo para obtener el valor de un registro según su id

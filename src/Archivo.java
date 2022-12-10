@@ -69,11 +69,12 @@ public class Archivo {
         String op1 = "^(add|sub|mul|div|mod|and|or|lsl|lsr|asr)\\s" + regNum + "," + regNum + "," + regNum + "$";
         String op2 = "^(add|sub|mul|div|mod|and|or|lsl|lsr|asr)\\s" + regNum + "," + regNum + "," + regImm + "$";
         String op3 = "^(cmp|not|mov)\\s" + regNum + "," + regImm + "$";
+        String op3_2 ="^(cmp|not|mov)\\s" + regNum + "," + regNum + "$";
         String op4 = "^(nop|ret)$";
         // splitear linea de texto
         Pattern pattern = Pattern.compile("(\\s|,)", Pattern.CANON_EQ);
         String[] lineaSpliteada = pattern.split(lineaTexto);
-        System.out.println("DEBUG - SALIDA SPLIT:"+Arrays.toString(lineaSpliteada));
+        //System.out.println("DEBUG - SALIDA SPLIT:"+Arrays.toString(lineaSpliteada));
 
         // TODO Llegué hasta el nop, del ld hacia abajo esta incompleto
         pattern = Pattern.compile(op1, Pattern.CANON_EQ);
@@ -94,11 +95,18 @@ public class Archivo {
                 if (match) {
                     instrucciones.add(crearInstruccion("op3", lineaSpliteada));
                 } else {
-                    pattern = Pattern.compile(op4, Pattern.CANON_EQ);
+                    pattern = Pattern.compile(op3_2, Pattern.CANON_EQ);
                     matcher = pattern.matcher(lineaTexto);
                     match = matcher.find();
-                    if (match) {
-                        instrucciones.add(crearInstruccion("op4", lineaSpliteada));
+                    if(match) {
+                        instrucciones.add(crearInstruccion("op3_2", lineaSpliteada));
+                    }else{
+                        pattern = Pattern.compile(op4, Pattern.CANON_EQ);
+                        matcher = pattern.matcher(lineaTexto);
+                        match = matcher.find();
+                        if (match) {
+                            instrucciones.add(crearInstruccion("op4", lineaSpliteada));
+                        }
                     }
                 }
             }
@@ -115,8 +123,11 @@ public class Archivo {
             return new Instruccion(lineaSpliteada[0], lineaSpliteada[1], Integer.parseInt(lineaSpliteada[2]));
         }
 
+        if(op== "op3_2"){
+            return new Instruccion(lineaSpliteada[0], lineaSpliteada[1], lineaSpliteada[2]);
+        }
+
         if (op == "op1") {
-            System.out.println("FINAL:"+lineaSpliteada[3]);
             return new Instruccion(lineaSpliteada[0], lineaSpliteada[1],lineaSpliteada[2],lineaSpliteada[3]);
         } else if (op == "op2") {
             return new Instruccion(lineaSpliteada[0], lineaSpliteada[1],lineaSpliteada[2],Integer.parseInt(lineaSpliteada[3]));

@@ -19,12 +19,21 @@ public class Instruccion {
     }
 
     /**
-     * Constructor para instrucción cmp|not|mov
+     * Constructor para instrucción cmp|not|mov con imm
      */
     public Instruccion(String operacion,String registroDestino,int valorImm) {
         this.operacion=operacion;
         this.registroDestino=registroDestino;
         this.valorImm=valorImm;
+    }
+
+    /**
+     * Constructor para instrucción cmp|not|mov con registro
+     */
+    public Instruccion(String operacion,String registroDestino,String registroPrincipal) {
+        this.operacion=operacion;
+        this.registroDestino=registroDestino;
+        this.registroPrincipal=registroPrincipal;
     }
 
     /**

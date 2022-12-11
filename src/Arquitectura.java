@@ -139,8 +139,20 @@ public class Arquitectura {
                             instruccion.registroSecundario);
                 }
                 break;
-            /* --------- Operación and --------- */
             case "cmp":
+                break;
+            case "and":
+                if (instruccion.registroSecundario == "") {
+                        operacionAnd( // con imm
+                                instruccion.registroDestino,
+                                instruccion.registroPrincipal,
+                                instruccion.valorImm);
+                } else {
+                    operacionAnd( // en caso contrario, es con registro
+                            instruccion.registroDestino,
+                            instruccion.registroPrincipal,
+                            instruccion.registroSecundario);
+                }
                 break;
             /* --------- Operación mov --------- */
             case "mov":
@@ -212,6 +224,35 @@ public class Arquitectura {
 
     }
 
+    public void operacionAnd(String registroDestino, String registroPrincipal, String registroSecundario) {
+        String binarioPrin=getBinarioValorRegistro(registroPrincipal);
+        String binarioSec=getBinarioValorRegistro(registroSecundario);
+        String binarioResultante="";
+        for(int i=0;i<16;i++){
+            if(binarioPrin.charAt(i)=='1' && binarioSec.charAt(i)=='1'){
+                binarioResultante+="1";
+            }else{
+                binarioResultante+="0";
+            }
+        }
+        setBinarioValorRegistro(registroDestino, binarioResultante);
+    }
+
+    public void operacionAnd(String registroDestino, String registroPrincipal, int valorImm) {
+        String binarioPrin=getBinarioValorRegistro(registroPrincipal);
+        String binarioImm=Integer.toBinaryString(valorImm);
+        binarioImm=completarBinario16B(binarioImm);
+        String binarioResultante="";
+        for(int i=0;i<16;i++){
+            if(binarioPrin.charAt(i)=='1' && binarioImm.charAt(i)=='1'){
+                binarioResultante+="1";
+            }else{
+                binarioResultante+="0";
+            }
+        }
+        setBinarioValorRegistro(registroDestino, binarioResultante);
+    }
+
     /* ACÁ IRIÁN OPERACIONES CMP,AND;OR,NOT */
 
     public void operacionMov(String registroDestino, String registroPrincipal) {
@@ -239,6 +280,30 @@ public class Arquitectura {
     }
 
     /*
+     * Metodo para obtener el valor binario de un registro según su id
+     */
+    public String getBinarioValorRegistro(String id) {
+        for (Registro registro : registros) {
+            if (registro.getId().equals(id)) {
+                return registro.getBinarioValor();
+            }
+        }
+        return null; // no encontró el id del registro
+    }
+
+    /*
+     * Metodo para setear un binario en el valor (númerico) en un registro según su id
+     */
+    public void setBinarioValorRegistro(String id, String binario) {
+        for (Registro registro : registros) {
+            if (registro.getId().equals(id)) {
+                registro.setBinarioValor(binario);
+            }
+        }
+    }
+
+
+    /*
      * Metodo para setear un valor en un registro según su id
      */
     public void setValorRegistro(String id, int value) {
@@ -257,4 +322,17 @@ public class Arquitectura {
         }
     }
 
+    public String completarBinario16B(String binario){
+        int largoBinario = binario.length();
+        if(largoBinario==16){
+            return binario;
+        }else{
+            String binarioCorrecto="";
+            for(int i=0;i<(16-largoBinario);i++){
+                binarioCorrecto+="0";
+            }
+            binarioCorrecto+=binario;
+            return binarioCorrecto;
+        }
+    }
 }

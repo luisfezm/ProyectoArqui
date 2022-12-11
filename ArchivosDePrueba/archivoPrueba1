@@ -1,7 +1,5 @@
-mov rs2,4
-mov rs2,2
-mov rs5,1
-div rs1,rs2,rs5
-div rs1,rs2,2
-mov rs10,rs2
-mod rs0,rs15,2
+mov rs1,5
+mov rs2,5
+mov rs3,3
+and rs4,rs1,rs2
+and rs5,rs1,rs3

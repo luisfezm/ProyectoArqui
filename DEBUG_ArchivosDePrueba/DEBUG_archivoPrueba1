@@ -1,7 +1,5 @@
-mov rs2,4 <-- Formato valido: true
-mov rs2,2 <-- Formato valido: true
-mov rs5,1 <-- Formato valido: true
-div rs1,rs2,rs5 <-- Formato valido: true
-div rs1,rs2,2 <-- Formato valido: true
-mov rs10,rs2 <-- Formato valido: true
-mod rs0,rs15,2 <-- Formato valido: true
+mov rs1,5 <-- Formato valido: true
+mov rs2,5 <-- Formato valido: true
+mov rs3,3 <-- Formato valido: true
+and rs4,rs1,rs2 <-- Formato valido: true
+and rs5,rs1,rs3 <-- Formato valido: true

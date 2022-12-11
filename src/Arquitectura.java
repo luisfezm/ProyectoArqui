@@ -4,18 +4,19 @@ public class Arquitectura {
     private ArrayList<Registro> registros;
 
     public Arquitectura() {
-        registros=new ArrayList<>();
+        registros = new ArrayList<>();
         // inicialmente, todos los registros tienen como valor un 0
-        for(int i=0;i<=16;i++) {
-            registros.add(new Registro("rs"+i,0));
+        for (int i = 0; i <= 16; i++) {
+            registros.add(new Registro("rs" + i, 0));
         }
     }
-    public boolean ejecutarInstrucciones(ArrayList<Instruccion> instrucciones ) {
+
+    public boolean ejecutarInstrucciones(ArrayList<Instruccion> instrucciones) {
         System.out.println("REGISTROS EN UN INICIO");
         mostrarRegistros();
         System.out.println();
 
-        for(Instruccion instruccion: instrucciones) {
+        for (Instruccion instruccion : instrucciones) {
             System.out.println(instruccion.toString());
             determinarOperacion(instruccion);
             mostrarRegistros(); // para ir debugueando
@@ -23,105 +24,214 @@ public class Arquitectura {
         return true;
     }
 
-    public void determinarOperacion(Instruccion instruccion){
-        //System.out.println("DEBUG - Op instrucción:"+ instruccion.operacion);
-        switch(instruccion.operacion){
-            /* --------- Operación de division ---------*/
-            case "div":
-                /* Como existen divisiones con registro o imm, debemos determinar de qué tipo se trata */
-                /* VER CLASE INSTRUCCION: como el registro secundario de una instrucción inicializa en ""
-                 * entonces, si este al instanciar una Instrucción operación div sigue siendo "", es entonces
+    public void determinarOperacion(Instruccion instruccion) {
+        // System.out.println("DEBUG - Op instrucción:"+ instruccion.operacion);
+        switch (instruccion.operacion) {
+            /* --------- Operación de Add --------- */
+            case "add":
+                /*
+                 * Como existen sumas con registro o imm, debemos determinar de qué tipo se
+                 * trata
+                 */
+                /*
+                 * VER CLASE INSTRUCCION: como el registro secundario de una instrucción
+                 * inicializa en ""
+                 * entonces, si este al instanciar una Instrucción operación add sigue siendo
+                 * "", es entonces
                  * una operación con Imm
                  */
-                if(instruccion.registroSecundario == ""){
-                    operacionDivision(
-                        instruccion.registroDestino,
-                        instruccion.registroPrincipal,
-                        instruccion.valorImm
-                    );
-                }else{ // en caso contrario, es con registro
-                    operacionDivision(
-                        instruccion.registroDestino,
-                        instruccion.registroPrincipal,
-                        instruccion.registroSecundario
-                    );
+                if (instruccion.registroSecundario == "") {
+                    operacionAdd(
+                            instruccion.registroDestino,
+                            instruccion.registroPrincipal,
+                            instruccion.valorImm);
+                } else { // en caso contrario, es con registro
+                    operacionAdd(
+                            instruccion.registroDestino,
+                            instruccion.registroPrincipal,
+                            instruccion.registroSecundario);
                 }
                 break;
-            /* --------- Operación mod --------- */   
+            case "sub":
+                /*
+                 * Como existen restas con registro o imm, debemos determinar de qué tipo se
+                 * trata
+                 */
+                /*
+                 * VER CLASE INSTRUCCION: como el registro secundario de una instrucción
+                 * inicializa en ""
+                 * entonces, si este al instanciar una Instrucción operación sub sigue siendo
+                 * "", es entonces
+                 * una operación con Imm
+                 */
+                if (instruccion.registroSecundario == "") {
+                    operacionSub(
+                            instruccion.registroDestino,
+                            instruccion.registroPrincipal,
+                            instruccion.valorImm);
+                } else { // en caso contrario, es con registro
+                    operacionSub(
+                            instruccion.registroDestino,
+                            instruccion.registroPrincipal,
+                            instruccion.registroSecundario);
+                }
+                break;
+            case "mul":
+                /*
+                 * Como existen multiplicaciones con registro o imm, debemos determinar de qué
+                 * tipo se trata
+                 */
+                /*
+                 * VER CLASE INSTRUCCION: como el registro secundario de una instrucción
+                 * inicializa en ""
+                 * entonces, si este al instanciar una Instrucción operación mul sigue siendo
+                 * "", es entonces
+                 * una operación con Imm
+                 */
+                if (instruccion.registroSecundario == "") {
+                    operacionMul(
+                            instruccion.registroDestino,
+                            instruccion.registroPrincipal,
+                            instruccion.valorImm);
+                } else { // en caso contrario, es con registro
+                    operacionMul(
+                            instruccion.registroDestino,
+                            instruccion.registroPrincipal,
+                            instruccion.registroSecundario);
+                }
+                break;
+            /* --------- Operación de division --------- */
+            case "div":
+                /*
+                 * Como existen divisiones con registro o imm, debemos determinar de qué tipo se
+                 * trata
+                 */
+                /*
+                 * VER CLASE INSTRUCCION: como el registro secundario de una instrucción
+                 * inicializa en ""
+                 * entonces, si este al instanciar una Instrucción operación div sigue siendo
+                 * "", es entonces
+                 * una operación con Imm
+                 */
+                if (instruccion.registroSecundario == "") {
+                    operacionDivision(
+                            instruccion.registroDestino,
+                            instruccion.registroPrincipal,
+                            instruccion.valorImm);
+                } else { // en caso contrario, es con registro
+                    operacionDivision(
+                            instruccion.registroDestino,
+                            instruccion.registroPrincipal,
+                            instruccion.registroSecundario);
+                }
+                break;
+            /* --------- Operación mod --------- */
             case "mod":
-                if(instruccion.registroSecundario == ""){
+                if (instruccion.registroSecundario == "") {
                     operacionMod( // con imm
-                        instruccion.registroDestino,
-                        instruccion.registroPrincipal,
-                        instruccion.valorImm
-                    );
-                }else{
+                            instruccion.registroDestino,
+                            instruccion.registroPrincipal,
+                            instruccion.valorImm);
+                } else {
                     operacionMod( // en caso contrario, es con registro
-                        instruccion.registroDestino,
-                        instruccion.registroPrincipal,
-                        instruccion.registroSecundario
-                    );
-                }   
+                            instruccion.registroDestino,
+                            instruccion.registroPrincipal,
+                            instruccion.registroSecundario);
+                }
                 break;
             /* --------- Operación and --------- */
             case "cmp":
                 break;
             /* --------- Operación mov --------- */
             case "mov":
-                if(instruccion.registroPrincipal==""){ // con imm
+                if (instruccion.registroPrincipal == "") { // con imm
                     operacionMov(
-                        instruccion.registroDestino,
-                        instruccion.valorImm
-                    );
-                }else{ // con registro
+                            instruccion.registroDestino,
+                            instruccion.valorImm);
+                } else { // con registro
                     operacionMov(
-                        instruccion.registroDestino,
-                        instruccion.registroPrincipal
-                    );
+                            instruccion.registroDestino,
+                            instruccion.registroPrincipal);
                 }
                 break;
         }
     }
 
-    /* -----------------------------------OPERACIONES---------------------------------------------- */
-    public void operacionDivision(String registroDestino, String registroPrincipal, String registroSecundario){
-        int resultado= getValorRegistro(registroPrincipal)/getValorRegistro(registroSecundario);
+    /*
+     * -----------------------------------OPERACIONES-------------------------------
+     * ---------------
+     */
+    public void operacionAdd(String registroDestino, String registroPrincipal, String registroSecundario) {
+        int resultado = getValorRegistro(registroPrincipal) + getValorRegistro(registroSecundario);
         setValorRegistro(registroDestino, resultado);
     }
 
-    public void operacionDivision(String registroDestino, String registroPrincipal, int Imm){
-        int resultado= getValorRegistro(registroPrincipal)/Imm;
-        setValorRegistro(registroDestino, resultado);   
-    }
-
-    public void operacionMod(String registroDestino, String registroPrincipal, String registroSecundario){
-        int resultado= getValorRegistro(registroPrincipal)%getValorRegistro(registroSecundario);
+    public void operacionAdd(String registroDestino, String registroPrincipal, int Imm) {
+        int resultado = getValorRegistro(registroPrincipal) + Imm;
         setValorRegistro(registroDestino, resultado);
     }
 
-    public void operacionMod(String registroDestino, String registroPrincipal, int Imm){
-        int resultado= getValorRegistro(registroPrincipal)%Imm;
-        setValorRegistro(registroDestino, resultado);   
-        
+    public void operacionSub(String registroDestino, String registroPrincipal, String registroSecundario) {
+        int resultado = getValorRegistro(registroPrincipal) - getValorRegistro(registroSecundario);
+        setValorRegistro(registroDestino, resultado);
+    }
+
+    public void operacionSub(String registroDestino, String registroPrincipal, int Imm) {
+        int resultado = getValorRegistro(registroPrincipal) - Imm;
+        setValorRegistro(registroDestino, resultado);
+    }
+
+    public void operacionMul(String registroDestino, String registroPrincipal, String registroSecundario) {
+        int resultado = getValorRegistro(registroPrincipal) * getValorRegistro(registroSecundario);
+        setValorRegistro(registroDestino, resultado);
+    }
+
+    public void operacionMul(String registroDestino, String registroPrincipal, int Imm) {
+        int resultado = getValorRegistro(registroPrincipal) * Imm;
+        setValorRegistro(registroDestino, resultado);
+    }
+
+    public void operacionDivision(String registroDestino, String registroPrincipal, String registroSecundario) {
+        int resultado = getValorRegistro(registroPrincipal) / getValorRegistro(registroSecundario);
+        setValorRegistro(registroDestino, resultado);
+    }
+
+    public void operacionDivision(String registroDestino, String registroPrincipal, int Imm) {
+        int resultado = getValorRegistro(registroPrincipal) / Imm;
+        setValorRegistro(registroDestino, resultado);
+    }
+
+    public void operacionMod(String registroDestino, String registroPrincipal, String registroSecundario) {
+        int resultado = getValorRegistro(registroPrincipal) % getValorRegistro(registroSecundario);
+        setValorRegistro(registroDestino, resultado);
+    }
+
+    public void operacionMod(String registroDestino, String registroPrincipal, int Imm) {
+        int resultado = getValorRegistro(registroPrincipal) % Imm;
+        setValorRegistro(registroDestino, resultado);
+
     }
 
     /* ACÁ IRIÁN OPERACIONES CMP,AND;OR,NOT */
 
-    public void operacionMov(String registroDestino, String registroPrincipal){
+    public void operacionMov(String registroDestino, String registroPrincipal) {
         setValorRegistro(registroDestino, getValorRegistro(registroPrincipal));
     }
 
-    public void operacionMov(String registroDestino, int Imm){
+    public void operacionMov(String registroDestino, int Imm) {
         setValorRegistro(registroDestino, Imm);
     }
-    /* ----------------------------------- FIN OPERACIONES---------------------------------------------- */
+    /*
+     * ----------------------------------- FIN
+     * OPERACIONES----------------------------------------------
+     */
 
     /*
      * Metodo para obtener el valor de un registro según su id
      */
-    public Integer getValorRegistro(String id){
-        for(Registro registro: registros){
-            if( registro.getId().equals(id)){
+    public Integer getValorRegistro(String id) {
+        for (Registro registro : registros) {
+            if (registro.getId().equals(id)) {
                 return registro.getValor();
             }
         }
@@ -131,21 +241,20 @@ public class Arquitectura {
     /*
      * Metodo para setear un valor en un registro según su id
      */
-    public void setValorRegistro(String id,int value){
-        for(Registro registro: registros){
-            if( registro.getId().equals(id)){
+    public void setValorRegistro(String id, int value) {
+        for (Registro registro : registros) {
+            if (registro.getId().equals(id)) {
                 registro.setValor(value);
             }
         }
     }
 
-    public void mostrarRegistros(){
+    public void mostrarRegistros() {
         // recorremos cada Registro del registro
         System.out.println();
-        for(Registro registro: registros){
+        for (Registro registro : registros) {
             System.out.println(registro.mostrarRegistro());
         }
     }
-
 
 }

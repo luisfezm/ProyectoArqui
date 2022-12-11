@@ -154,6 +154,19 @@ public class Arquitectura {
                             instruccion.registroSecundario);
                 }
                 break;
+            case "or":
+                if (instruccion.registroSecundario == "") {
+                    operacionOr( // con imm
+                            instruccion.registroDestino,
+                            instruccion.registroPrincipal,
+                            instruccion.valorImm);
+              } else {
+                    operacionOr( // en caso contrario, es con registro
+                            instruccion.registroDestino,
+                            instruccion.registroPrincipal,
+                            instruccion.registroSecundario);
+                }
+                break;
             /* --------- Operación mov --------- */
             case "mov":
                 if (instruccion.registroPrincipal == "") { // con imm
@@ -245,6 +258,35 @@ public class Arquitectura {
         String binarioResultante="";
         for(int i=0;i<16;i++){
             if(binarioPrin.charAt(i)=='1' && binarioImm.charAt(i)=='1'){
+                binarioResultante+="1";
+            }else{
+                binarioResultante+="0";
+            }
+        }
+        setBinarioValorRegistro(registroDestino, binarioResultante);
+    }
+
+    public void operacionOr(String registroDestino, String registroPrincipal, String registroSecundario) {
+        String binarioPrin=getBinarioValorRegistro(registroPrincipal);
+        String binarioSec=getBinarioValorRegistro(registroSecundario);
+        String binarioResultante="";
+        for(int i=0;i<16;i++){
+            if(binarioPrin.charAt(i)=='1' || binarioSec.charAt(i)=='1'){
+                binarioResultante+="1";
+            }else{
+                binarioResultante+="0";
+            }
+        }
+        setBinarioValorRegistro(registroDestino, binarioResultante);
+    }
+
+    public void operacionOr(String registroDestino, String registroPrincipal, int valorImm) {
+        String binarioPrin=getBinarioValorRegistro(registroPrincipal);
+        String binarioImm=Integer.toBinaryString(valorImm);
+        binarioImm=completarBinario16B(binarioImm);
+        String binarioResultante="";
+        for(int i=0;i<16;i++){
+            if(binarioPrin.charAt(i)=='1' || binarioImm.charAt(i)=='1'){
                 binarioResultante+="1";
             }else{
                 binarioResultante+="0";

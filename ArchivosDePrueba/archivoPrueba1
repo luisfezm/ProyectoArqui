@@ -2,4 +2,4 @@ mov rs1,5
 mov rs2,5
 mov rs3,3
 and rs4,rs1,rs2
-and rs5,rs1,rs3
+or rs5,rs1,rs3

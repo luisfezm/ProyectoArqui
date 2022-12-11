@@ -160,11 +160,22 @@ public class Arquitectura {
                             instruccion.registroDestino,
                             instruccion.registroPrincipal,
                             instruccion.valorImm);
-              } else {
+                } else {
                     operacionOr( // en caso contrario, es con registro
                             instruccion.registroDestino,
                             instruccion.registroPrincipal,
                             instruccion.registroSecundario);
+                }
+                break;
+            case "not":
+                if (instruccion.registroSecundario == "") {
+                    operacionNot( // con imm
+                            instruccion.registroDestino,
+                            instruccion.valorImm);
+                } else {
+                    operacionNot( // en caso contrario, es con registro
+                            instruccion.registroDestino,
+                            instruccion.registroPrincipal);
                 }
                 break;
             /* --------- Operación mov --------- */
@@ -293,6 +304,34 @@ public class Arquitectura {
             }
         }
         setBinarioValorRegistro(registroDestino, binarioResultante);
+    }
+
+    public void operacionNot(String registroDestino, String registroPrincipal){
+        String binarioPrin=getBinarioValorRegistro(registroPrincipal);
+        String binarioNot="";
+        for(int i=0;i<16;i++){
+            if(binarioPrin.charAt(i)=='1'){
+                binarioNot+=0;
+            }else{ // si es cero
+                binarioNot+=1;
+            }
+        }
+        setBinarioValorRegistro(registroDestino, binarioNot);
+    }
+
+    public void operacionNot(String registroDestino, int valorImm){
+        // recordar que el binario del valor imm no necesariamente tiene los 16B que estamos
+        // trabajando, por tanto, hay que completarlo antes de realizar la operación NOT
+        String binarioImm=completarBinario16B(Integer.toBinaryString(valorImm));
+        String binarioNot="";
+        for(int i=0;i<16;i++){
+            if(binarioImm.charAt(i)=='1'){
+                binarioNot+=0;
+            }else{ // si es cero
+                binarioNot+=1;
+            }
+        }
+        setBinarioValorRegistro(registroDestino, binarioNot);
     }
 
     /* ACÁ IRIÁN OPERACIONES CMP,AND;OR,NOT */

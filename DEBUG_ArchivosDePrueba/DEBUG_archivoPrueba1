@@ -3,3 +3,4 @@ mov rs2,5 <-- Formato valido: true
 mov rs3,3 <-- Formato valido: true
 and rs4,rs1,rs2 <-- Formato valido: true
 or rs5,rs1,rs3 <-- Formato valido: true
+not rs10,1 <-- Formato valido: true

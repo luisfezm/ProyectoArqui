@@ -1,3 +1,3 @@
-mov rs1,10 <-- Formato valido: true
-mov rs2,2 <-- Formato valido: true
-asr rs0,rs1,rs2 <-- Formato valido: true
+mov rs0,2 <-- Formato valido: true
+mov rs1,3 <-- Formato valido: true
+add rs2,rs1,rs0 <-- Formato valido: true

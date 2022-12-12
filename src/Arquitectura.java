@@ -214,6 +214,9 @@ public class Arquitectura {
                             instruccion.registroSecundario);
                 }
                 break;
+            case "nop":
+                // no hace nada
+                break;
         }
     }
 

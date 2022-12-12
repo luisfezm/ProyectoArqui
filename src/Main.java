@@ -4,11 +4,13 @@ public class Main {
 
         String nombreArchivo = "archivoPrueba2";
         Archivo archivo1 = new Archivo(nombreArchivo);
+        VerificadorPipeline verificador = new VerificadorPipeline(archivo1.getInstrucciones());
         archivo1.leerArchivo();
 
         if (archivo1.getFormatoCorrecto()) {
             System.out.println("Archivo en formato correcto");
-            arq.ejecutarInstrucciones(archivo1.getInstrucciones());
+            verificador.pipeline();
+            // arq.ejecutarInstrucciones(archivo1.getInstrucciones());
 
         } else {
             System.out.println(

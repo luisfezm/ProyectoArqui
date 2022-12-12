@@ -1,3 +1,5 @@
 mov rs0,2
+add rs5,rs0,1
 mov rs1,3
-add rs2,rs1,rs0
+mov rs2,4
+add rs3,rs2,rs1

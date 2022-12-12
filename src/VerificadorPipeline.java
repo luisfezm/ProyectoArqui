@@ -44,22 +44,17 @@ public class VerificadorPipeline {
                     if (B.regPrinInicializado()) {
                         // comparo con el principal
                         // si son iguales retorno false
-                        if (!compararRegistros(A.registroDestino, B.registroPrincipal)) { // si arrojó un falso la
-                                                                                          // comparacion = return false
-                            // return false; // hubo un conflicto con el destino A y principal B
-                            // System.out.println("encuentra conflicto para instrucciones: " + A.toString()
-                            // + " y " + B.toString());
+                        if (compararRegistros(A.registroDestino, B.registroPrincipal)) { // si arrojó un true existe
+                                                                                         // conflicto
                             System.out.println("Encuentra conflicto entre instrucciones: " + i + " y " + (i + 1));
                             // flag = true;
                         }
                         if (B.regSecInicializado()) {
                             // comparo con el segundo
                             // si son iguales retorno false
-                            if (compararRegistros(A.registroDestino, B.registroSecundario)) {
-                                // System.out.println("encuentra conflicto para instrucciones: " + A.toString()
-                                // + " y " + B.toString());
+                            if (compararRegistros(A.registroDestino, B.registroSecundario)) { // si arrojó un true
+                                                                                              // existe conflicto
                                 System.out.println("Encuentra conflicto entre instrucciones: " + i + " y " + (i + 1));
-                                // flag = true;
                             }
                         } else {
                             // return true;
@@ -78,9 +73,10 @@ public class VerificadorPipeline {
     }
 
     public boolean compararRegistros(String A, String B) {
-        if (A == B) { // si el registro destino de A es igual a un registro de B retorna false
-            return false;
+        // System.out.println("compara: " + A + " y " + B);
+        if (A.equals(B)) { // si el registro destino de A es igual a un registro de B retorna true
+            return true;
         }
-        return true;
+        return false;
     }
 }

@@ -22,7 +22,7 @@ public class Main {
                     System.out.println("\n---------\nIngrese \n" +
                             "1. Si desea ejecutar las instrucciones \n" +
                             "2. Si desea verificar pipelines \n" +
-                            "3. Si desea reparar pipelines \n" +
+                            "3. Si desea reparar pipelines + ejecutar instrucciones corregidas \n" +
                             "4. SI desea salir");
                     opcionEscogida=Integer.parseInt(sc.nextLine());
                     switch (opcionEscogida){
@@ -30,13 +30,15 @@ public class Main {
                             arq.ejecutarInstrucciones(archivo1.getInstrucciones());
                             break;
                         case 2:
-                            archivo1.getInstrucciones().mostrarLista();
                             System.out.println("----");
-                            verificador.pipeline();
+                            verificador.pipeline(false);
                             System.out.println("----");
-                            verificador.listaInstrucciones.mostrarLista();
                             break;
                         case 3:
+                            System.out.println("----");
+                            verificador.pipeline(true);
+                            System.out.println("----");
+                            arq.ejecutarInstrucciones(archivo1.getInstrucciones());
                             break;
                     }
                 }

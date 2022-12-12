@@ -11,7 +11,7 @@ public class VerificadorPipeline {
     /*
      * Devolverá falso si la verificación es correcta, si detecta un error: false
      */
-    public void pipeline() {
+    public void pipeline(boolean reparar) {
         ArrayList<String> permitido1 = new ArrayList<String>() {
             {
                 add("nop");
@@ -55,7 +55,9 @@ public class VerificadorPipeline {
                                     System.out.println("Conflicto entre: \n" +
                                             ""+A.toString()+"\n" +
                                             ""+B.toString()+"\n");
-                                    listaInstrucciones.añadirEntre(A, new Instruccion("nop"));
+                                    if(reparar){
+                                        listaInstrucciones.añadirEntre(A, new Instruccion("nop"));
+                                    }
                                 }
                                 if (B.regSecInicializado()) {
                                     // comparo con el segundo
@@ -65,7 +67,9 @@ public class VerificadorPipeline {
                                         System.out.println("Conflicto entre: \n" +
                                                 ""+A.toString()+"\n" +
                                                 ""+B.toString()+"\n");
-                                        listaInstrucciones.añadirEntre(A, new Instruccion("nop"));
+                                        if(reparar) {
+                                            listaInstrucciones.añadirEntre(A, new Instruccion("nop"));
+                                        }
                                     }
                                 }
                             }

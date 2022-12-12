@@ -11,6 +11,9 @@ public class Instruccion {
     public String registroSecundario="";
     public int valorImm=Integer.MIN_VALUE;
 
+    // agregado
+    Instruccion instruccionSiguiente;
+
     /**
      * Constructor para instruccion nop o ret
      */

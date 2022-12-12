@@ -15,11 +15,12 @@ public class Archivo {
     private BufferedReader br = null;
     private String nombreArchivo;
     private ArrayList<Instruccion> instrucciones;
+    private ListaEnlazadaInstrucciones listaEnlazadaInstrucciones;
     private boolean formatoCorrecto = true;
 
     public Archivo(String nombreArchivo) {
         this.nombreArchivo = nombreArchivo;
-        instrucciones = new ArrayList<>();
+        listaEnlazadaInstrucciones=new ListaEnlazadaInstrucciones();
     }
 
     /**
@@ -81,31 +82,36 @@ public class Archivo {
         Matcher matcher = pattern.matcher(lineaTexto);
         boolean match = matcher.find();
         if (match) {
-            instrucciones.add(crearInstruccion("op1", lineaSpliteada));
+            listaEnlazadaInstrucciones.añadirDelante(crearInstruccion("op1", lineaSpliteada));
+            //instrucciones.add(crearInstruccion("op1", lineaSpliteada));
         } else {
             pattern = Pattern.compile(op2, Pattern.CANON_EQ);
             matcher = pattern.matcher(lineaTexto);
             match = matcher.find();
             if (match) {
-                instrucciones.add(crearInstruccion("op2", lineaSpliteada));
+                listaEnlazadaInstrucciones.añadirDelante(crearInstruccion("op2", lineaSpliteada));
+                //instrucciones.add(crearInstruccion("op2", lineaSpliteada));
             } else {
                 pattern = Pattern.compile(op3, Pattern.CANON_EQ);
                 matcher = pattern.matcher(lineaTexto);
                 match = matcher.find();
                 if (match) {
-                    instrucciones.add(crearInstruccion("op3", lineaSpliteada));
+                    listaEnlazadaInstrucciones.añadirDelante(crearInstruccion("op3", lineaSpliteada));
+                    //instrucciones.add(crearInstruccion("op3", lineaSpliteada));
                 } else {
                     pattern = Pattern.compile(op3_2, Pattern.CANON_EQ);
                     matcher = pattern.matcher(lineaTexto);
                     match = matcher.find();
                     if(match) {
-                        instrucciones.add(crearInstruccion("op3_2", lineaSpliteada));
+                        listaEnlazadaInstrucciones.añadirDelante(crearInstruccion("op3_2", lineaSpliteada));
+                        //instrucciones.add(crearInstruccion("op3_2", lineaSpliteada));
                     }else{
                         pattern = Pattern.compile(op4, Pattern.CANON_EQ);
                         matcher = pattern.matcher(lineaTexto);
                         match = matcher.find();
                         if (match) {
-                            instrucciones.add(crearInstruccion("op4", lineaSpliteada));
+                            listaEnlazadaInstrucciones.añadirDelante(crearInstruccion("op4", lineaSpliteada));
+                            //instrucciones.add(crearInstruccion("op4", lineaSpliteada));
                         }
                     }
                 }
@@ -139,7 +145,7 @@ public class Archivo {
         return formatoCorrecto;
     }
 
-    public ArrayList<Instruccion> getInstrucciones() {
-        return instrucciones;
+    public ListaEnlazadaInstrucciones getInstrucciones(){
+        return listaEnlazadaInstrucciones;
     }
 }

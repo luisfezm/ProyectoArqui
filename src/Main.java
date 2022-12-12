@@ -38,6 +38,7 @@ public class Main {
                             System.out.println("----");
                             verificador.pipeline(true);
                             System.out.println("----");
+                            verificador.listaInstrucciones.mostrarLista();
                             arq.ejecutarInstrucciones(archivo1.getInstrucciones());
                             break;
                     }

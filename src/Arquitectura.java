@@ -24,23 +24,11 @@ public class Arquitectura {
         }
          */
         Instruccion instruccionIterada=listaInstrucciones.instruccionInicial;
-        if(instruccionIterada==null){
-            System.out.println("Nada que ejecutar, lista de instrucciones vacias");
-        }else{
-            // si es la única, sem uestra
-            if(instruccionIterada.instruccionSiguiente==null){
-                System.out.println("\n----\n"+instruccionIterada.toString());
-                determinarOperacion(instruccionIterada);
-                mostrarRegistros();
-            }else{
-                // si no es la única, se muestra todos los nodos de la lista enlazad
-                while(instruccionIterada.instruccionSiguiente!=null){
-                    System.out.println("\n----\n"+instruccionIterada.toString());
-                    determinarOperacion(instruccionIterada);
-                    mostrarRegistros();
-                    instruccionIterada=instruccionIterada.instruccionSiguiente;
-                }
-            }
+        while(instruccionIterada!=null){
+            System.out.println("\n----\n"+instruccionIterada.toString());
+            determinarOperacion(instruccionIterada);
+            mostrarRegistros();
+            instruccionIterada=instruccionIterada.instruccionSiguiente;
         }
         return true;
     }

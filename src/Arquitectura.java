@@ -11,15 +11,36 @@ public class Arquitectura {
         }
     }
 
-    public boolean ejecutarInstrucciones(ArrayList<Instruccion> instrucciones) {
+    public boolean ejecutarInstrucciones(ListaEnlazadaInstrucciones listaInstrucciones) {
         System.out.println("REGISTROS EN UN INICIO");
         mostrarRegistros();
         System.out.println();
 
+        /*
         for (Instruccion instruccion : instrucciones) {
             System.out.println(instruccion.toString());
             determinarOperacion(instruccion);
             mostrarRegistros(); // para ir debugueando
+        }
+         */
+        Instruccion instruccionIterada=listaInstrucciones.instruccionInicial;
+        if(instruccionIterada==null){
+            System.out.println("Nada que ejecutar, lista de instrucciones vacias");
+        }else{
+            // si es la única, sem uestra
+            if(instruccionIterada.instruccionSiguiente==null){
+                System.out.println("\n----\n"+instruccionIterada.toString());
+                determinarOperacion(instruccionIterada);
+                mostrarRegistros();
+            }else{
+                // si no es la única, se muestra todos los nodos de la lista enlazad
+                while(instruccionIterada.instruccionSiguiente!=null){
+                    System.out.println("\n----\n"+instruccionIterada.toString());
+                    determinarOperacion(instruccionIterada);
+                    mostrarRegistros();
+                    instruccionIterada=instruccionIterada.instruccionSiguiente;
+                }
+            }
         }
         return true;
     }

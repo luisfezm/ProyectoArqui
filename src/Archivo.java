@@ -14,7 +14,6 @@ public class Archivo {
     private FileWriter fw = null;
     private BufferedReader br = null;
     private String nombreArchivo;
-    private ArrayList<Instruccion> instrucciones;
     private ListaEnlazadaInstrucciones listaEnlazadaInstrucciones;
     private boolean formatoCorrecto = true;
 

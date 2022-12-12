@@ -27,7 +27,7 @@ public class Main {
                     opcionEscogida=Integer.parseInt(sc.nextLine());
                     switch (opcionEscogida){
                         case 1:
-                            //arq.ejecutarInstrucciones(archivo1.getInstrucciones());
+                            arq.ejecutarInstrucciones(archivo1.getInstrucciones());
                             break;
                         case 2:
                             archivo1.getInstrucciones().mostrarLista();
